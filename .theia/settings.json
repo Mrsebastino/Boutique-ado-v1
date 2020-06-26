@@ -16,5 +16,8 @@
       "**/.DS_Store": true,
       "**/.theia": true,
    },
-   "emmet.extensionsPath": ".theia"
+"emmet.extensionsPath": ".theia",
+"cSpell.words": [
+    "signup"
+]
 }
