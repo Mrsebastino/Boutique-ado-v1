@@ -18,6 +18,9 @@
    },
 "emmet.extensionsPath": ".theia",
 "cSpell.words": [
+    "corecss",
+    "crossorigin",
+    "extracss",
     "signup"
 ]
 }
