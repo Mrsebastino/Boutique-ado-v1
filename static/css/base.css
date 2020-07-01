@@ -60,10 +60,6 @@ body {
     background: #000 !important;
 }
 
-.new-to-site{
-    padding-top: 3em;
-}
-
 .overlay{
     height: 100%;
     width: 100%;
@@ -99,7 +95,7 @@ body {
 }
 /* pad the top of the navbar a bit */
 
-@media (max-width: 991px) {
+@media (min-width: 300px) and (max-width: 991px) {
     .header-container{
         padding-top: 116px;
     }
