@@ -3,16 +3,13 @@ html {
 }
 
 body {
-    background: url('/media/woman-with-bags-cropped.jpg') no-repeat center center fixed;
+    background: url('/media/homepage_background_cropped.jpg') no-repeat center center fixed;
     background-size: cover;
     height: calc(100vh - 164px);
     color: #555;
     font-family: 'Lato';
 }
 
-.header-container{
-    height: 164px;
-}
 /* from Bulma */
 .icon {
     align-items: center;
@@ -39,6 +36,19 @@ body {
 .btn-black {
     background: black;
     color: white;
+}
+
+.btn-outline-black {
+    background: white;
+    color: black !important;
+    border: 1px solid black;
+}
+
+.btn-outline-black:hover,
+.btn-outline-black:active,
+.btn-outline-black:focus {
+    background: black;
+    color: white !important;
 }
 
 .shop-now-button:hover,
