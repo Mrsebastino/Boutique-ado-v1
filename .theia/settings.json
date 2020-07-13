@@ -18,6 +18,7 @@
    },
 "emmet.extensionsPath": ".theia",
 "cSpell.words": [
+    "autohide",
     "corecss",
     "crossorigin",
     "extracss",
