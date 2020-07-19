@@ -25,6 +25,7 @@
     "crossorigin",
     "extracss",
     "getenv",
+    "lineitems",
     "noimage",
     "signup"
 ]
