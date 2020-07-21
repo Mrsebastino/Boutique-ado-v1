@@ -57,13 +57,48 @@ form.addEventListener("submit", function (ev) {
   $("#submit-button").attr("disabled", true);
   $('#payment-form').fadeToggle(100);
   $('#loading-overlay').fadeToggle(100);
-  stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: card,
-      },
+
+  let saveInfo = Boolean($('#id-save-info').attr('checked'));
+  //From using {% csrf_token% } in the form
+  let csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+  let postData = {
+      'csrfmiddlewaretoken': csrfToken,
+      'client_secret': clientSecret,
+      'save_info': saveInfo,
+  }
+  let url = '/checkout/cache_checkout_data/';
+
+  $.post(url, postData).done(function(){
+      stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+            card: card,
+            billing_details:{
+                name: $.trim(form.full_name.value),
+                phone: $.trim(form.phone_number.value),
+                email: $.trim(form.email.value),
+                address:{
+                    line1: $.trim(form.street_address1.value),
+                    line2: $.trim(form.street_address2.value),
+                    city: $.trim(form.town_or_city.value),
+                    country: $.trim(form.country.value),
+                    state: $.trim(form.county.value),
+                }
+            }
+        },
+        shipping:{
+            name: $.trim(form.full_name.value),
+            phone: $.trim(form.phone_number.value),
+            address:{
+                    line1: $.trim(form.street_address1.value),
+                    line2: $.trim(form.street_address2.value),
+                    city: $.trim(form.town_or_city.value),
+                    country: $.trim(form.country.value),
+                    postal_code: $.trim(form.postcode.value),
+                    state: $.trim(form.county.value),
+                }
+        },
       // Show error to your customer same as the error as above
-    })
-    .then(function (result) {
+      }).then(function (result) {
       if (result.error) {
         let errorDiv = document.getElementById("card-errors");
         let html = `
@@ -80,12 +115,11 @@ form.addEventListener("submit", function (ev) {
         // The payment has been processed!
         if (result.paymentIntent.status === "succeeded") {
           form.submit();
-          // Show a success message to your customer
-          // There's a risk of the customer closing the window before callback
-          // execution. Set up a webhook or plugin to listen for the
-          // payment_intent.succeeded event that handles any business critical
-          // post-payment actions.
         }
       }
     });
+  }).fail(function(){
+      // Just reload the page, the error will be the django message
+      location.reload();
+  })
 });
