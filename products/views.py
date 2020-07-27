@@ -12,9 +12,7 @@ from .forms import ProductForm
 
 def all_products(request):
     """A view to show all products, including sorting and search"""
-    if not request.user.is_superuser:
-        messages.error(request, 'Sorry only store owner can do that')
-        return redirect(reverse('home'))
+    
 
     products = Product.objects.all()
     query = None
@@ -137,6 +135,10 @@ def edit_product(request, product_id):
 @login_required
 def delete_product(request, product_id):
     """ Delete a product from the store """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry only store owner can do that')
+        return redirect(reverse('home'))
+
     product = get_object_or_404(Product, pk=product_id)
     product.delete()
     messages.success(request, 'Product deleted!')
