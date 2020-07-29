@@ -28,8 +28,11 @@
     "cust",
     "extracss",
     "getenv",
+    "gunicorn",
     "lineitems",
     "noimage",
-    "signup"
+    "sebastien",
+    "signup",
+    "wsgi"
 ]
 }
