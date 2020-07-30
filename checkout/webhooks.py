@@ -27,15 +27,15 @@ def webhook(request):
         )
     except ValueError as e:
         # Invalid payload
-        print('error1')
         return HttpResponse(status=400)
+        print('error1')
     except stripe.error.SignatureVerificationError as e:
         # Invalid signature
-        print('error2')
         return HttpResponse(status=400)
+        print('error2')
     except Exception as e:
-        print('error3')
         return HttpResponse(content=e, status=400)
+        print('error3')
 
     # Set up a webhook handler
     handler = StripeWH_Handler(request)
